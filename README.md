@@ -8,6 +8,7 @@ The architecture consists of 9 parallel processing elements (PEs). Partial sums 
 
 The generated feature map is exported from Vivado simulation and interfaced with PyTorch for activation function evaluation.
 
+I have also shared the images related to the project
 ---
 
 ## Features
