@@ -119,12 +119,31 @@ The design was synthesized using Xilinx Vivado to evaluate FPGA resource utiliza
 | Bonded IOBs     |  309 |       300 | Exceeds capacity |
 
 
+
 ### Resource Analysis
 
 * **LUTs:** 742 LUTs are utilized for combinational logic, including multiplication, arithmetic, and control operations.
 * **Registers:** 504 slice registers are used for operand propagation, intermediate results, buffers, and control logic.
 * **Systolic Array:** The 16-PE array accounts for 441 LUTs and 272 slice registers.
 * **I/O Resources:** The design requires 309 bonded I/O resources, exceeding the selected device's capacity of 300. Further optimization is required before FPGA implementation.
+
+
+
+## Activation Functions (Python/PyTorch)
+
+The MAC output from the 4×4 systolic array is exported to `mac_output.txt` and processed using Python and PyTorch.
+
+Implemented activation functions:
+
+* **ReLU:** Sets negative values to zero.
+* **Sigmoid:** Maps values to (0, 1).
+* **Tanh:** Maps values to (-1, 1).
+* **Softmax:** Normalizes each row into a probability distribution.
+
+### Results
+
+![Activation Function Results](images/activation_results.png)
+
 
 
 ## Future Improvements
