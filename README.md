@@ -142,7 +142,8 @@ Implemented activation functions:
 
 ### Results
 
-![Activation Function Results](images/activation_results.png)
+<img width="428" height="413" alt="Screenshot 2026-10-26 141248" src="https://github.com/user-attachments/assets/200ba89f-f30b-4264-9e3b-46a620d0ab07" />
+
 
 
 
