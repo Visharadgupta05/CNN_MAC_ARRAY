@@ -2,26 +2,26 @@
 
 ## Overview
 
-This project implements a 4×4 systolic array-based Multiply-Accumulate (MAC) unit using SystemVerilog. The architecture consists of 16 Processing Elements (PEs) arranged in a 4×4 grid to perform parallel signed multiplication and accumulation.
+This project implements a 4×4 systolic array that performs parallel signed multiplication and accumulation. Each Processing Element multiplies signed 4-bit operands and accumulates the product in an 11-bit register.
 
-Each PE uses Booth multiplication to calculate the product of signed 4-bit operands and accumulates the results in an 11-bit register. Input and weight buffers employ pipelined data movement and skewing to synchronize operand delivery across the array.
+Input and weight buffers manage operand delivery and skewing to synchronize data movement through the array. An FSM-based controller coordinates matrix loading, computation, pipeline flushing, and completion signaling.
 
-An FSM-based controller coordinates matrix loading, computation, pipeline flushing, and completion signaling. The design is verified through simulation using a dedicated SystemVerilog testbench.
+The design is functionally verified using a SystemVerilog testbench in Xilinx Vivado. The resulting MAC output is exported to a text file and processed using Python/PyTorch.
 
 ---
 
 ## Features
 
-* SystemVerilog implementation
-* 4×4 systolic array comprising 16 Processing Elements
-* Signed 4-bit Booth multiplication
-* 11-bit accumulators within each PE
-* Pipelined input and weight propagation
-* Input and weight buffers with skewing
-* FSM-based control logic
-* Synchronous accumulation with asynchronous active-low reset
-* Clear functionality for resetting intermediate results
-* Simulation-based functional verification
+ 4×4 systolic array with 16 Processing Elements
+ Signed 4-bit Booth multiplication
+11-bit accumulation registers
+Pipelined operand propagation and skewing
+Dedicated input and weight buffers
+FSM-based computation control
+Clear functionality for intermediate results
+SystemVerilog testbench for functional verification
+Python/PyTorch integration for activation functions
+FPGA resource utilization analysis
 
 ---
 
