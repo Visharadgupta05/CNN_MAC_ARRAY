@@ -155,3 +155,7 @@ Implemented activation functions:
 * Implement configurable array dimensions and operand widths.
 * Optimize controller timing and systolic data scheduling.
 * Deploy the design on an FPGA for hardware validation.
+* Add appropriate XDC constraints for static timing analysis.
+* Evaluate critical-path delay and maximum operating frequency.
+* Resolve FPGA I/O limitations to enable successful implementation.
+
