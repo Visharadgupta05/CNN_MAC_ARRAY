@@ -1,65 +1,74 @@
-# CNN MAC Array Accelerator in SystemVerilog
+# Systolic Array MAC Unit in SystemVerilog
 
 ## Overview
 
-This project implements a 3×3 MAC (Multiply-Accumulate) processing element array for CNN convolution using SystemVerilog. The design performs convolution on a 5×5×3 input feature map with a 3×3×3 kernel and generates a 3×3 output feature map.
+This project implements a 4×4 systolic array-based Multiply-Accumulate (MAC) unit using SystemVerilog. The architecture consists of 16 Processing Elements (PEs) arranged in a 4×4 grid to perform parallel signed multiplication and accumulation.
 
-The architecture consists of 9 parallel processing elements (PEs). Partial sums are propagated between PEs in a pipelined manner, enabling efficient accumulation of convolution results across multiple clock cycles.
+Each PE uses Booth multiplication to calculate the product of signed 4-bit operands and accumulates the results in an 11-bit register. Input and weight buffers employ pipelined data movement and skewing to synchronize operand delivery across the array.
 
-The generated feature map is exported from Vivado simulation and interfaced with PyTorch for activation function evaluation.
-
-I have also shared the images related to the project
-
+An FSM-based controller coordinates matrix loading, computation, pipeline flushing, and completion signaling. The design is verified through simulation using a dedicated SystemVerilog testbench.
 
 ---
 
 ## Features
 
 * SystemVerilog implementation
-* 3×3 MAC processing element array
-* 5×5×3 input feature map
-* 3×3×3 convolution kernel
-* 3×3 output feature map
+* 4×4 systolic array comprising 16 Processing Elements
+* Signed 4-bit Booth multiplication
+* 11-bit accumulators within each PE
+* Pipelined input and weight propagation
+* Input and weight buffers with skewing
 * FSM-based control logic
-* Pipelined partial-sum propagation
-* Vivado simulation and verification
-* PyTorch integration for activation functions
+* Synchronous accumulation with asynchronous active-low reset
+* Clear functionality for resetting intermediate results
+* Simulation-based functional verification
 
 ---
 
 ## Architecture
 
-Input Feature Map (5×5×3)
+Input Matrix A (4×4)
 
 ↓
 
-3×3 MAC Processing Element Array
+Input Buffer and Skewing
 
 ↓
 
-Partial Sum Accumulation
+4×4 Systolic Array (16 PEs) ← Weight Buffer and Skewing
 
 ↓
 
-Output Feature Map (3×3)
+Signed Multiplication and Partial-Sum Accumulation
 
 ↓
 
-Export to Text File
-
-↓
-
-PyTorch Activation Functions (ReLU, Sigmoid, Tanh, Softmax)
+4×4 Output Matrix C
 
 ---
 
-## Output Example
+## Processing Element (PE)
 
-90 99 108
+Each Processing Element performs the following operations:
 
-135 144 153
+1. Receives signed 4-bit input and weight operands.
+2. Computes their product using Booth multiplication.
+3. Accumulates the product into an 11-bit result register.
+4. Forwards the input and weight operands to neighboring PEs.
 
-180 189 198
+The PEs operate concurrently, enabling parallel computation with pipelined data propagation.
+
+---
+
+## Controller FSM
+
+The control unit manages the execution sequence through five states:
+
+* **IDLE:** Waits for the start signal.
+* **LOAD:** Loads input and weight matrices into their respective buffers.
+* **COMPUTE:** Enables operand propagation through the systolic array.
+* **FLUSH:** Allows remaining pipeline operations to complete.
+* **DONE:** Signals completion of the computation.
 
 ---
 
@@ -67,31 +76,26 @@ PyTorch Activation Functions (ReLU, Sigmoid, Tanh, Softmax)
 
 * SystemVerilog
 * Xilinx Vivado
-* Python
-* PyTorch
+* SystemVerilog Testbench
 
 ---
 
 ## Project Structure
 
 ```text
-MAC_DESIGN/
+SYSTOLIC_MAC/
 ├── mac_2_systolic.sv
 ├── mac_2_systolic_tb.sv
-├── activation.py
-├── mac_output.txt
-└── README.md
+├── README.md
+└── Simulation Outputs
 ```
 
 ---
 
 ## Future Improvements
 
-* Hardware ReLU implementation
-* Max Pooling layer
-* Fully streaming systolic dataflow
-* FPGA deployment and hardware validation
-
----
-
-
+* Increase accumulator width to support larger accumulation ranges.
+* Integrate the array into a CNN convolution accelerator.
+* Implement configurable array dimensions and operand widths.
+* Optimize controller timing and systolic data scheduling.
+* Deploy the design on an FPGA for hardware validation.
