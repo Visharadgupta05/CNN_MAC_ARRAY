@@ -12,16 +12,17 @@ The design is functionally verified using a SystemVerilog testbench in Xilinx Vi
 
 ## Features
 
- *4×4 systolic array with 16 Processing Elements
- *Signed 4-bit Booth multiplication
- *11-bit accumulation registers
-*Pipelined operand propagation and skewing
-Dedicated input and weight buffers
-FSM-based computation control
-Clear functionality for intermediate results
-SystemVerilog testbench for functional verification
-Python/PyTorch integration for activation functions
-FPGA resource utilization analysis
+* 4×4 systolic array with 16 Processing Elements (PEs).
+* Signed 4-bit Booth multiplication.
+* 11-bit accumulators for MAC operations.
+* Pipelined input and weight propagation.
+* Input and weight buffers with skewing.
+* FSM-based control for loading, computation, flushing, and completion.
+* Clear functionality for resetting intermediate results.
+* Functional verification using a SystemVerilog testbench.
+* FPGA resource utilization analysis using Xilinx Vivado.
+* Python/PyTorch integration for ReLU, Sigmoid, Tanh, and Softmax activation functions.
+
 
 ---
 
