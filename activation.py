@@ -1,24 +1,26 @@
-import numpy as np
 import torch
-import torch.nn.functional as F
 
-feature_map = np.loadtxt("mac_output.txt")
+# Load the matrix exported from Vivado simulation
+matrix = torch.tensor(
+    [
+        [float(value) for value in line.split()]
+        for line in open("mac_output.txt")
+        if line.strip()
+    ],
+    dtype=torch.float32
+)
 
-feature_map = torch.tensor(feature_map, dtype=torch.float32)
+print("Original MAC Output:")
+print(matrix)
 
-print("Input Feature Map:")
-print(feature_map)
+print("\nReLU:")
+print(torch.relu(matrix))
 
-relu_out = F.relu(feature_map)
+print("\nSigmoid:")
+print(torch.sigmoid(matrix))
 
-print("\nReLU Output:")
-print(relu_out)
+print("\nTanh:")
+print(torch.tanh(matrix))
 
-print("\nSigmoid Output:")
-print(torch.sigmoid(feature_map))
-
-print("\nTanh Output:")
-print(torch.tanh(feature_map))
-
-print("\nSoftmax Output:")
-print(torch.softmax(feature_map.flatten(), dim=0).reshape(3,3))
+print("\nSoftmax (row-wise):")
+print(torch.softmax(matrix, dim=1))
