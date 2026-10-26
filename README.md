@@ -12,10 +12,10 @@ The design is functionally verified using a SystemVerilog testbench in Xilinx Vi
 
 ## Features
 
- 4×4 systolic array with 16 Processing Elements
- Signed 4-bit Booth multiplication
-11-bit accumulation registers
-Pipelined operand propagation and skewing
+ *4×4 systolic array with 16 Processing Elements
+ *Signed 4-bit Booth multiplication
+ *11-bit accumulation registers
+*Pipelined operand propagation and skewing
 Dedicated input and weight buffers
 FSM-based computation control
 Clear functionality for intermediate results
