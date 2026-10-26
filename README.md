@@ -116,7 +116,7 @@ The design was synthesized using Xilinx Vivado to evaluate FPGA resource utiliza
 | Slice Registers |  504 |    82,000 |            0.61% |
 | F7 Multiplexers |   64 |    20,500 |            0.31% |
 | Bonded IOBs     |  309 |       300 | Exceeds capacity |
-| BUFGCTRL        |    1 |        32 |            3.13% |
+
 
 ### Resource Analysis
 
@@ -124,10 +124,6 @@ The design was synthesized using Xilinx Vivado to evaluate FPGA resource utiliza
 * **Registers:** 504 slice registers are used for operand propagation, intermediate results, buffers, and control logic.
 * **Systolic Array:** The 16-PE array accounts for 441 LUTs and 272 slice registers.
 * **I/O Resources:** The design requires 309 bonded I/O resources, exceeding the selected device's capacity of 300. Further optimization is required before FPGA implementation.
-
-*Note: These results are from the Vivado utilization report. Timing analysis and successful implementation on the target FPGA have not yet been verified.*
-
-
 
 
 ## Future Improvements
